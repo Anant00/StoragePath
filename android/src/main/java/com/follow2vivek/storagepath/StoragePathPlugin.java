@@ -116,16 +116,16 @@ public class StoragePathPlugin implements MethodCallHandler {
         uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
 
         String[] projection = {
-                MediaStore.MediaColumns._ID,
+                MediaStore.Images.Media._ID, MediaStore.Images.Media.DATA,
                 MediaStore.Images.Media.BUCKET_DISPLAY_NAME};
 
         final String orderBy = MediaStore.Images.Media.DATE_TAKEN;
         cursor = activity.getContentResolver().query(uri, projection, null, null, orderBy + " DESC");
 
-        column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns._ID);
+        column_index_data = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         column_index_folder_name = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME);
         while (cursor.moveToNext()) {
-            String absolutePathOfImage = cursor.getString(column_index_data);
+            absolutePathOfImage = cursor.getString(column_index_data);
 
 
             for (int i = 0; i < filesModelArrayList.size(); i++) {

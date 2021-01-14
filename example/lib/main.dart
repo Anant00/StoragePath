@@ -18,8 +18,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    getAudioPath();
-    getVideoPath();
+    // getAudioPath();
+    //   getVideoPath();
+    getImagesPath();
   }
 
   Future<void> getImagesPath() async {
@@ -27,13 +28,12 @@ class _MyAppState extends State<MyApp> {
     try {
       imagespath = await StoragePath.imagesPath;
       var response = jsonDecode(imagespath);
-      print(response);
       var imageList = response as List;
       List<FileModel> list =
           imageList.map<FileModel>((json) => FileModel.fromJson(json)).toList();
 
       setState(() {
-        imagePath = list[11].files[0];
+        imagePath = list[0].files[0];
       });
     } on PlatformException {
       imagespath = 'Failed to get path';
@@ -52,7 +52,8 @@ class _MyAppState extends State<MyApp> {
     }
     return videoPath;
   }
-    Future<void> getAudioPath() async {
+
+  Future<void> getAudioPath() async {
     String audioPath = "";
     try {
       audioPath = await StoragePath.audioPath;
@@ -63,7 +64,8 @@ class _MyAppState extends State<MyApp> {
     }
     return audioPath;
   }
- Future<void> getFilePath() async {
+
+  Future<void> getFilePath() async {
     String filePath = "";
     try {
       filePath = await StoragePath.filePath;
@@ -74,6 +76,7 @@ class _MyAppState extends State<MyApp> {
     }
     return filePath;
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
