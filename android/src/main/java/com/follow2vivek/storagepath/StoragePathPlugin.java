@@ -125,9 +125,8 @@ public class StoragePathPlugin implements MethodCallHandler {
         column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns._ID);
         column_index_folder_name = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME);
         while (cursor.moveToNext()) {
-            String id = cursor.getString(column_index_data);
+            String absolutePathOfImage = cursor.getString(column_index_data);
 
-            absolutePathOfImage = ContentUris.withAppendedId(uri, Long.parseLong(id)).toString();
 
             for (int i = 0; i < filesModelArrayList.size(); i++) {
                 if (filesModelArrayList.get(i) != null &&
